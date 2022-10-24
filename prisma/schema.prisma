@@ -59,7 +59,7 @@ model Ower {
   batch String?
   email String?
   name String?
-  payment Boolean? @default(false)
+  payment Int?
   paymentMethods String?
   phone String?
   security Boolean? @default(false)

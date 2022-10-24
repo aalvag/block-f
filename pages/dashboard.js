@@ -1,29 +1,26 @@
 import { useState } from "react";
-import Head from "next/head";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import NavBar from "../components/NavBar";
-import TableData from "../components/TableData";
-import Grid from "@mui/material/Grid";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import BasicModal from "../components/Modal";
 import Deposits from "../components/Deposits";
+import TableData from "../components/TableData";
+import NavBar from "../components/NavBar";
 import useSWR, { useSWRConfig } from "swr";
+import BasicModal from "../components/Modal";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
+// import { mainListItems, secondaryListItems } from "./listItems";
 
-export default function Home() {
-  const [open, setOpen] = useState(false);
+const Dashboard = () => {
+  const [open, setOpen] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState(null);
   const { data, error } = useSWR("api/owner", fetcher);
   const { data: dataDeposits, error: errorDeposits } = useSWR("api/deposits", fetcher);
   const { mutate } = useSWRConfig();
-
-  if (error) return <div>failed to load</div>;
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -31,17 +28,7 @@ export default function Home() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Head>
-        <title>Manzana F 🍎</title>
-        <meta name="description" content="Block F Mariano Acosta" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <NavBar open={open} toggleDrawer={toggleDrawer} />
-
-      {/* 
-      <Grid item xs={12} mt={2}>
-        <TableData setOpenModal={setOpenModal} data={data} setSelected={setSelected} />
-      </Grid> */}
       <Box
         component="main"
         sx={{
@@ -102,12 +89,6 @@ export default function Home() {
             {/* Table ingresos */}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Grid sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
-                  <Typography>Tabla de Propietarios</Typography>
-                  <Button variant="contained" size="small" onClick={() => setOpenModal(true)}>
-                    Agregar Propieatario
-                  </Button>
-                </Grid>
                 <TableData setOpenModal={setOpenModal} data={data} setSelected={setSelected} />
               </Paper>
             </Grid>
@@ -123,5 +104,6 @@ export default function Home() {
       />
     </Box>
   );
-}
+};
 
+export default Dashboard;

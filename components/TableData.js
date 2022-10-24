@@ -16,37 +16,17 @@ const columns = [
   },
   { id: "name", label: "Nombre" },
   {
-    id: "phone",
-    label: "Teléfono",
-    //format: (value) => formatPhone(value),
-    minWidth: 130,
-  },
-  {
-    id: "security",
-    label: "Seguridad",
-    format: (value) => (value ? "Si" : "No"),
-  },
-  {
-    id: "paymentMethods",
-    label: "Medio de Pago",
-  },
-  {
-    id: "status",
-    label: "Informe",
-  },
-  {
     id: "payment",
     label: "Pagado",
     format: (value) => (value ? "Si" : "No"),
   },
+  {
+    id: "status",
+    label: "Observaciones",
+  },
 ];
 
-// format number 1212341234 => 12-1234-1234
-function formatPhone(phone) {
-  return `${phone.slice(0, 2)}-${phone.slice(2, 6)}-${phone.slice(6)}`;
-}
-
-export default function TableData({ setOpen, data, setSelected }) {
+export default function TableData({ setOpenModal, data, setSelected }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -60,7 +40,7 @@ export default function TableData({ setOpen, data, setSelected }) {
   };
   const handleShow = (value) => {
     setSelected(value);
-    setOpen(true);
+    setOpenModal(true);
   };
 
   return (
@@ -92,7 +72,7 @@ export default function TableData({ setOpen, data, setSelected }) {
                           key={column.id}
                           align={column.align}
                           onClick={() => handleShow(row)}
-                          sx={{ backgroundColor: row.payment ? "#f8d7da" : "" }}
+                          sx={{ backgroundColor: row.payment ? "#90EE90" : "" }}
                         >
                           {column.format ? column.format(value) : value}
                         </TableCell>

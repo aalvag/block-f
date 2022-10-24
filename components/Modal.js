@@ -19,11 +19,11 @@ const validationSchema = yup.object({
   //name: yup.string().required("Nombre is requerido"),
   //phone: yup.string().required("Telefono is requerido"),
   //paymentMethods: yup.string().required("Metodo de pago is requerido"),
-  security: yup.boolean().required("Seguridad is requerido"),
-  payment: yup.boolean().required("Pago is requerido"),
+  //security: yup.boolean().required("Seguridad is requerido"),
+  //payment: yup.boolean().required("Pago is requerido"),
 });
 
-export default function BasicModal({ open, setOpen, selected, setSelected, mutate }) {
+export default function BasicModal({ openModal, setOpenModal, selected, setSelected, mutate }) {
   const [disabled, setDisabled] = useState(true);
 
   const updateOwner = async (id, data) => {
@@ -46,7 +46,7 @@ export default function BasicModal({ open, setOpen, selected, setSelected, mutat
       paymentMethods: selected?.paymentMethods || "",
       status: selected?.status || "",
       security: selected?.security || false,
-      payment: selected?.payment || false,
+      payment: selected?.payment || 0,
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -63,28 +63,29 @@ export default function BasicModal({ open, setOpen, selected, setSelected, mutat
         const data = await res.json();
       }
 
-      setOpen(false);
+      setOpenModal(false);
       mutate("api/owner");
+      mutate("api/deposits");
     },
     enableReinitialize: true,
   });
 
   const handleClose = () => {
     setSelected(null);
-    setOpen(false);
+    setOpenModal(false);
   };
   const handleEdit = () => setDisabled(false);
 
   return (
     <div>
       <Modal
-        open={open}
+        open={openModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <div>
-          <Dialog open={open} onClose={handleClose}>
+          <Dialog open={openModal} onClose={handleClose}>
             <form onSubmit={formik.handleSubmit}>
               <DialogTitle>
                 <Button onClick={handleClose}>Cancel</Button>
@@ -172,7 +173,7 @@ export default function BasicModal({ open, setOpen, selected, setSelected, mutat
                       margin="dense"
                       id="status"
                       name="status"
-                      label="Estado"
+                      label="Observaciones"
                       type="text"
                       fullWidth
                       disabled={disabled}
@@ -181,18 +182,16 @@ export default function BasicModal({ open, setOpen, selected, setSelected, mutat
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="payment"
-                          name="payment"
-                          checked={formik.values.payment}
-                          onChange={formik.handleChange}
-                          color="success"
-                          disabled={disabled}
-                        />
-                      }
-                      label="Pagado"
+                    <TextField
+                      margin="dense"
+                      id="payment"
+                      name="payment"
+                      label="Pago"
+                      type="number"
+                      fullWidth
+                      disabled={disabled}
+                      value={formik.values.payment}
+                      onChange={formik.handleChange}
                     />
                     <FormControlLabel
                       control={
