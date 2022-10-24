@@ -57,7 +57,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 const NavBar = ({ open, toggleDrawer }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="absolute" open={open}>
+      <AppBar position="absolute" open={false}>
         <Toolbar
           sx={{
             pr: "24px", // keep right padding when drawer closed
@@ -70,7 +70,7 @@ const NavBar = ({ open, toggleDrawer }) => {
             // onClick={toggleDrawer}
             sx={{
               marginRight: "36px",
-              ...(open && { display: "none" }),
+              // ...(open && { display: "none" }),
             }}
           >
             🍎
@@ -96,9 +96,9 @@ const NavBar = ({ open, toggleDrawer }) => {
           </IconButton>
         </Toolbar>
         <Divider />
-         <List component="nav">{mainListItems}</List>  
+         <List component="nav">{mainListItems}</List> 
       </Drawer>
-        */}
+         */}
     </Box>
   );
 };

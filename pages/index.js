@@ -62,7 +62,6 @@ export default function Home() {
                   p: 2,
                   display: "flex",
                   flexDirection: "column",
-                  height: 240,
                 }}
               >
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>
