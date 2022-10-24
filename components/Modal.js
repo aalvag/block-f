@@ -46,7 +46,7 @@ export default function BasicModal({ openModal, setOpenModal, selected, setSelec
       paymentMethods: selected?.paymentMethods || "",
       status: selected?.status || "",
       security: selected?.security || false,
-      payment: selected?.payment || 0,
+      amount: selected?.amount || 0,
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -184,13 +184,13 @@ export default function BasicModal({ openModal, setOpenModal, selected, setSelec
                   <Grid item xs={6}>
                     <TextField
                       margin="dense"
-                      id="payment"
-                      name="payment"
+                      id="amount"
+                      name="amount"
                       label="Pago"
                       type="number"
                       fullWidth
                       disabled={disabled}
-                      value={formik.values.payment}
+                      value={formik.values.amount}
                       onChange={formik.handleChange}
                     />
                     <FormControlLabel

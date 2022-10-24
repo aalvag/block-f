@@ -9,10 +9,10 @@ export default async function handler(req, res) {
         const users = await getOwners();
 
         const totalDeposits = users.reduce((acc, user) => {
-          return acc + user.payment;
+          return acc + user.amount;
         }, 0);
 
-        const totalPaidUsers = users.filter((user) => user.payment > 0).length;
+        const totalPaidUsers = users.filter((user) => user.amount > 0).length;
 
         res.status(200).json({ totalPaidUsers, totalDeposits });
       } catch (error) {

@@ -16,7 +16,7 @@ const columns = [
   },
   { id: "name", label: "Nombre" },
   {
-    id: "payment",
+    id: "amount",
     label: "Pagado",
     format: (value) => (value ? "Si" : "No"),
   },
@@ -72,7 +72,7 @@ export default function TableData({ setOpenModal, data, setSelected }) {
                           key={column.id}
                           align={column.align}
                           onClick={() => handleShow(row)}
-                          sx={{ backgroundColor: row.payment ? "#90EE90" : "" }}
+                          sx={{ backgroundColor: row.amount ? "#90EE90" : "" }}
                         >
                           {column.format ? column.format(value) : value}
                         </TableCell>
