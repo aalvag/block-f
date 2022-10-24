@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         const users = await getOwners();
         res.status(200).json(users);
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(400).json({ success: false, error });
       }
       break;
 
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         const user = await createOwner(req.body);
         res.status(201).json(user);
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(400).json({ success: false, error });
       }
       break;
     default:
