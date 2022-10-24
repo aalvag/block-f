@@ -39,11 +39,6 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  phone         String?
-  security      Boolean?   @default(false)
-  payment       Boolean?   @default(false)
-  batch         String?
-  methodsPayment String?
   accounts      Account[]
   sessions      Session[]
 }
