@@ -8,14 +8,13 @@ export default async function handler(req, res) {
       try {
         const users = await getOwners();
 
-        // const totalDeposits = users.reduce((acc, user) => {
-        //   return acc + user.payment;
-        // }, 0);
+        const totalDeposits = users.reduce((acc, user) => {
+          return acc + user.payment;
+        }, 0);
 
-        // const totalPaidUsers = users.filter((user) => user.payment > 0).length;
+        const totalPaidUsers = users.filter((user) => user.payment > 0).length;
 
-        // res.status(200).json({ totalPaidUsers, totalDeposits });
-        res.status(200).json(users);
+        res.status(200).json({ totalPaidUsers, totalDeposits });
       } catch (error) {
         res.status(400).json({ success: false, error });
       }
